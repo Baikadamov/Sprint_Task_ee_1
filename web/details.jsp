@@ -1,5 +1,6 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="kz.biltlab.narxoz.db.Tasks" %>
+<%@ page import="kz.biltlab.narxoz.db.Items" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="ru">
 <head>
@@ -13,24 +14,27 @@
 <%@include file="navbar.jsp" %>
 <div class="container mt-5">
     <%
-        Tasks task = (Tasks) request.getAttribute("task");
-        if (task != null) {
+        Items items = (Items) request.getAttribute("item");
+        if (items != null) {
 
 
     %>
     <div class="row">
         <div class="col-6 mx-auto">
             <div class="mt-3">
+                Подрбонее о товаре!
+            </div>
+            <div class="mt-3">
                 <label>Name</label>
-                <input type="text" class="form-control" readonly value="<%=task.getName()%>">
+                <input type="text" class="form-control" readonly value="<%=items.getName()%>">
             </div>
             <div class="mt-3">
                 <label>Description</label>
-                <textarea class="form-control" readonly ><%=task.getDescription()%></textarea>
+                <textarea class="form-control" readonly ><%=items.getDescription()%></textarea>
             </div>
             <div class="mt-3">
-                <label>DeadLine Date</label>
-                <input type="date" class="form-control" readonly value="<%=task.getDeadlineDate()%>">
+                <label>Price</label>
+                <input   class="form-control" readonly value="<%=items.getPrice()%>">
             </div>
             <div class="mt-3">
                 <button type="button" class="btn btn-sm btn-success mt-3" data-bs-toggle="modal"
@@ -44,14 +48,11 @@
         </div>
     </div>
 
-
-
-
     <div class="modal fade" id="delete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form action="/deleteTask" method="post">
-                    <input type="hidden" name="id" value="<%=task.getId()%>">
+                <form action="/deleteItem" method="post">
+                    <input type="hidden" name="id" value="<%=items.getId()%>">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5">Confirm Delete</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -67,10 +68,7 @@
             </div>
         </div>
     </div>
-
-
-
-
+ 
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
          aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -79,24 +77,24 @@
                     <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
                 </div>
-                <form action="/saveTask" method="post">
+                <form action="/saveItem" method="post">
                     <div class="modal-body">
                         <div class="container">
                             <div class="row">
                                 <div>
-                                    <input type="hidden" name="task_id" value="<%=task.getId()%>">
+                                    <input type="hidden" name="item_id" value="<%=items.getId()%>">
                                     <label>Name</label>
-                                    <input type="text" class="form-control" name="task_name"
-                                           value="<%=task.getName()%>">
+                                    <input type="text" class="form-control" name="item_name"
+                                           value="<%=items.getName()%>">
                                 </div>
                                 <div>
                                     <label>Description</label>
                                     <textarea class="form-control"
-                                              name="task_description"><%=task.getDescription()%></textarea>
+                                              name="item_description"><%=items.getDescription()%></textarea>
                                 </div>
                                 <div>
-                                    <label>DeadLine Date</label>
-                                    <input type="date" class="form-control" name="task_date"  value="<%=task.getDeadlineDate()%>">
+                                    <label>Price</label>
+                                    <input  class="form-control" name="item_price"  value="<%=items.getPrice()%>">
                                 </div>
                             </div>
                         </div>

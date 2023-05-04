@@ -5,21 +5,21 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import kz.biltlab.narxoz.db.DBManager;
-import kz.biltlab.narxoz.db.Tasks;
+import kz.biltlab.narxoz.db.DBConnection;
+import kz.biltlab.narxoz.db.Items;
 
 import java.io.IOException;
 
 @WebServlet(value = "/details")
-public class TaskDetailServlet extends HttpServlet  {
+public class itemDetailServlet extends HttpServlet  {
 
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      int id = Integer.parseInt(request.getParameter("task_id"));
+      int id = Integer.parseInt(request.getParameter("item_id"));
 
-      Tasks task = DBManager.getTask(id);
+      Items item = DBConnection.getItem(id);
 
-      request.setAttribute("task" , task);
+      request.setAttribute("item" , item);
       request.getRequestDispatcher("/details.jsp").forward(request,response);
   }
 

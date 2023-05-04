@@ -1,22 +1,21 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<form action="/addTask" method="post">
+<form action="/addItem" method="post">
     <div class="modal-body">
-
         <div class="container">
             <div class="row">
                 <div class="col-8 mx-auto">
                     <div class="mt-3">
                         <label> Name</label>
-                        <input type="text" name="task_name" class="form-control" placeholder="name">
+                        <input type="text" name="item_name" class="form-control" placeholder="name">
                     </div>
                     <div class="mt-3">
                         <label> Description</label>
-                        <textarea name="task_description" class="form-control"
+                        <textarea name="item_description" class="form-control"
                         ></textarea>
                     </div>
                     <div class="mt-3">
-                        <label> Deadline</label>
-                        <input type="date" name="task_date" class="form-control" placeholder="date">
+                        <label> Price</label>
+                        <input type="number" name="item_price" class="form-control"  >
                     </div>
                 </div>
             </div>

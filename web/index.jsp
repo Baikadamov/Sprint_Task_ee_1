@@ -1,5 +1,6 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="kz.biltlab.narxoz.db.Tasks" %>
+<%@ page import="kz.biltlab.narxoz.db.Items" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="ru">
 <head>
@@ -12,51 +13,41 @@
 <body>
 <%@include file="navbar.jsp" %>
 <div class="container mt-5">
-    <button type="button" class="btn btn-sm btn-dark mt-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-        New Task
+    <h3 class="text-center mb-3">BITLAB SHOP</h3>
+    <%
+        if (currentUser != null) {
+    %>
+    <button type="button" class="btn btn-sm btn-dark mt-3 mb-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        ADD NEW ITEM
     </button>
-    <div class="row mt-5">
-        <div class="col-12  ">
-            <table class="table table-striped table-hover">
-                <thead class="table-header">
-                <tr>
-                    <th>ID</th>
-                    <th>NAME</th>
-                    <th>DESCRIPTION</th>
-                    <th>DEADLINE</th>
-                    <th>DETAILS</th>
-                </tr>
-                </thead>
-
-                <tbody>
-                <% ArrayList<Tasks> tasks = (ArrayList<Tasks>) request.getAttribute("tasks"); %>
-                <% if (tasks != null) {
-                    for (Tasks task : tasks) {
-                %>
-                <tr>
-                    <td>
-                        <%=task.getId()  %>
-                    </td>
-                    <td>
-                        <%=task.getName()  %>
-                    </td>
-                    <td>
-                        <%=task.getDescription()  %>
-                    </td>
-                    <td>
-                        <%=task.getDeadlineDate()  %>
-                    </td>
-                    <td>
-                        <a href="/details?task_id=<%=task.getId() %>" class="btn btn-primary"> About </a>
-                    </td>
-                </tr>
-                <% }
-                }%>
-                </tbody>
-
-            </table>
-
+    <%
+        }
+    %>
+    <div class="row g-3">
+        <% ArrayList<Items> items = (ArrayList<Items>) request.getAttribute("items"); %>
+        <% if (items != null) {
+            for (Items item : items) {
+        %>
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-text text-center display-6" style="font-size: 33px"><%=item.getName()  %>
+                    </p>
+                    <hr>
+                    <p class="card-text text-center">
+                        <%=item.getDescription()  %>
+                    </p>
+                    <p class="card-text text-center">
+                        <%=item.getPrice()  %> $
+                    </p>
+                    <p class="card-text text-center">
+                        <a href="/details?item_id=<%=item.getId()%>" class="btn btn-dark">Detail</a>
+                    </p>
+                </div>
+            </div>
         </div>
+        <% }
+        }%>
     </div>
 </div>
 
@@ -67,10 +58,10 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">Add New Task</h1>
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Add new Item</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
             </div>
-           <%@include file="addform.jsp"%>
+            <%@include file="addform.jsp" %>
         </div>
     </div>
 </div>

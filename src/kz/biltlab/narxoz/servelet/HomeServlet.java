@@ -5,7 +5,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import kz.biltlab.narxoz.db.DBConnection;
 import kz.biltlab.narxoz.db.DBManager;
+import kz.biltlab.narxoz.db.Items;
 import kz.biltlab.narxoz.db.Tasks;
 
 import java.io.IOException;
@@ -19,9 +21,9 @@ public class HomeServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     response.setContentType("text/html");
-    ArrayList<Tasks> tasks = DBManager.getTasks();
+    ArrayList<Items> items =DBConnection.getItems();
 
-    request.setAttribute("tasks",tasks);
+    request.setAttribute("items",items);
     request.getRequestDispatcher("/index.jsp").forward(request,response);
 
 
